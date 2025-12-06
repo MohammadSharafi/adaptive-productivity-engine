@@ -1,0 +1,238 @@
+type Task {
+  id: ID!
+  title: String!
+  description: String
+  priority: Priority!
+  status: TaskStatus!
+  estimatedDuration: Int
+  actualDuration: Int
+  dueDate: String
+  createdAt: String!
+  updatedAt: String!
+  completedAt: String
+  tags: [Tag!]!
+  energyLevel: Int
+  difficulty: Int
+}
+
+type Habit {
+  id: ID!
+  name: String!
+  description: String
+  frequency: HabitFrequency!
+  streak: Int!
+  createdAt: String!
+  updatedAt: String!
+  logs: [HabitLog!]!
+}
+
+type HabitLog {
+  id: ID!
+  habitId: ID!
+  date: String!
+  completed: Boolean!
+  notes: String
+}
+
+type MoodLog {
+  id: ID!
+  date: String!
+  mood: MoodType!
+  energyLevel: Int!
+  stressLevel: Int!
+  notes: String
+  createdAt: String!
+}
+
+type VoiceLog {
+  id: ID!
+  transcript: String
+  fileUrl: String
+  duration: Int
+  createdAt: String!
+  processed: Boolean!
+}
+
+type ProductivitySession {
+  id: ID!
+  startTime: String!
+  endTime: String
+  duration: Int
+  taskId: ID
+  focusScore: Int
+  distractions: [String!]!
+  createdAt: String!
+}
+
+type WeeklyPlan {
+  id: ID!
+  weekStart: String!
+  weekEnd: String!
+  recommendations: [Recommendation!]!
+  insights: String
+  createdAt: String!
+}
+
+type Recommendation {
+  id: ID!
+  type: RecommendationType!
+  title: String!
+  description: String!
+  priority: Int!
+  taskId: ID
+  suggestedTime: String
+}
+
+type Analytics {
+  productivityPeaks: [TimeBlock!]!
+  habitCorrelations: [HabitCorrelation!]!
+  focusPatterns: [FocusPattern!]!
+  taskInsights: [TaskInsight!]!
+  weeklySummary: WeeklySummary
+}
+
+type TimeBlock {
+  hour: Int!
+  productivityScore: Float!
+  taskCount: Int!
+}
+
+type HabitCorrelation {
+  habitName: String!
+  productivityImpact: Float!
+  moodImpact: Float!
+}
+
+type FocusPattern {
+  dayOfWeek: String!
+  averageFocusScore: Float!
+  bestTimeBlock: String!
+}
+
+type TaskInsight {
+  taskId: ID!
+  taskTitle: String!
+  averageDuration: Int!
+  difficultyRating: Float!
+  energyDrain: Float!
+}
+
+type WeeklySummary {
+  totalTasks: Int!
+  completedTasks: Int!
+  averageFocusScore: Float!
+  topHabits: [String!]!
+  moodTrend: String!
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  BLOCKED
+  COMPLETED
+  CANCELLED
+}
+
+enum HabitFrequency {
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+enum MoodType {
+  EXCELLENT
+  GOOD
+  NEUTRAL
+  POOR
+  TERRIBLE
+}
+
+enum RecommendationType {
+  TASK_PRIORITY
+  TIME_BLOCK
+  HABIT_SUGGESTION
+  BREAK_TIMING
+  FOCUS_OPTIMIZATION
+}
+
+type Query {
+  tasks(status: TaskStatus, limit: Int, offset: Int): [Task!]!
+  task(id: ID!): Task
+  habits: [Habit!]!
+  habit(id: ID!): Habit
+  moodLogs(limit: Int, offset: Int): [MoodLog!]!
+  voiceLogs(limit: Int, offset: Int): [VoiceLog!]!
+  productivitySessions(limit: Int, offset: Int): [ProductivitySession!]!
+  weeklyPlan(weekStart: String): WeeklyPlan
+  analytics: Analytics!
+  search(query: String!, limit: Int): [SearchResult!]!
+}
+
+type SearchResult {
+  type: String!
+  id: ID!
+  title: String!
+  content: String
+  score: Float!
+}
+
+type Mutation {
+  createTask(input: TaskInput!): Task!
+  updateTask(id: ID!, input: TaskInput!): Task!
+  completeTask(id: ID!): Task!
+  deleteTask(id: ID!): Boolean!
+  
+  createHabit(input: HabitInput!): Habit!
+  updateHabit(id: ID!, input: HabitInput!): Habit!
+  logHabit(habitId: ID!, date: String!, completed: Boolean!, notes: String): HabitLog!
+  
+  createMoodLog(input: MoodLogInput!): MoodLog!
+  updateMoodLog(id: ID!, input: MoodLogInput!): MoodLog!
+  
+  uploadVoiceLog(file: Upload!): VoiceLog!
+  
+  startSession(taskId: ID): ProductivitySession!
+  endSession(id: ID!): ProductivitySession!
+  
+  generateWeeklyPlan(weekStart: String): WeeklyPlan!
+}
+
+input TaskInput {
+  title: String!
+  description: String
+  priority: Priority!
+  estimatedDuration: Int
+  dueDate: String
+  tags: [String!]
+  energyLevel: Int
+  difficulty: Int
+}
+
+input HabitInput {
+  name: String!
+  description: String
+  frequency: HabitFrequency!
+}
+
+input MoodLogInput {
+  date: String!
+  mood: MoodType!
+  energyLevel: Int!
+  stressLevel: Int!
+  notes: String
+}
+
+type Subscription {
+  taskUpdated: Task!
+  analyticsUpdated: Analytics!
+  weeklyPlanGenerated: WeeklyPlan!
+  insightGenerated: String!
+}
+

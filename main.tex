@@ -1,0 +1,108 @@
+\documentclass[12pt,a4paper]{report}
+
+% Core packages for dissertation layout and math
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{enumitem}
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+% Dissertation metadata
+\title{Enhancing the Efficiency of Thermoelectric Systems Using Phase Change Materials Embedded within Hierarchical Nanoporous Polyvinyl Alcohol (PVA) Scaffolds Reinforced with CuS--MoS$_2$ Nanostructures}
+\author{Candidate Name}
+\date{\today}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    {\Large University Name\\[1.0cm]}
+    {\large Faculty of Engineering and Applied Sciences\\[0.5cm]}
+    {\large Department of Materials and Energy Systems\\[1.5cm]}
+    {\Huge\bfseries Enhancing the Efficiency of Thermoelectric Systems Using Phase Change Materials Embedded within Hierarchical Nanoporous Polyvinyl Alcohol (PVA) Scaffolds Reinforced with CuS--MoS$_2$ Nanostructures\\[1.5cm]}
+    {\Large A Dissertation Submitted in Partial Fulfillment of the Requirements for the Degree of Doctor of Philosophy\\[1.5cm]}
+    {\large by\\[0.2cm] Candidate Name\\[1.0cm]}
+    {\large Supervisor: Prof. Supervisor Name\\[2.0cm]}
+    {\large \today}
+\end{titlepage}
+
+\pagenumbering{roman}
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+Thermoelectric systems provide solid-state heat-to-electricity conversion with high reliability and low maintenance; however, widespread deployment remains constrained by modest conversion efficiencies under fluctuating thermal boundary conditions. This dissertation develops and evaluates a hybrid thermal-electrical material architecture in which a phase change material (PCM) is embedded inside a \emph{hierarchical nanoporous polyvinyl alcohol (PVA) scaffold} that is reinforced by dispersed CuS--MoS$_2$ nanostructures. A central constraint, maintained throughout this work, is that PVA is the sole continuous scaffold matrix. CuS--MoS$_2$ acts strictly as a reinforcing nanofiller within the PVA network and does not replace, coat over, or become the scaffold framework. The PCM is infiltrated into porosity engineered into PVA via freeze-drying and post-crosslink stabilization. This configuration is designed to buffer transient heat, improve thermal contact regularity at the thermoelectric interface, and increase useful temperature gradients over realistic duty cycles.
+
+The study establishes a coupled multiphysics framework linking thermoelectric transport, phase-transition thermodynamics, and scaffold-scale effective transport. The theoretical chapters derive Seebeck, Peltier, and Thomson relations from irreversible thermodynamics and Onsager coupling, then formalize the figure of merit $ZT = S^2\sigma T/\kappa$ with decomposition $\kappa=\kappa_e+\kappa_l$, including deviations from the Wiedemann--Franz law in nanostructured composites. A latent-heat enthalpy formulation and Stefan-interface interpretation are integrated with transient conduction in porous domains. The PVA chapter quantifies hydrogen-bond-mediated mechanics, crystallinity effects, pore hierarchy control, and confinement constraints for leakage-resistant PCM retention under thermal cycling. The CuS--MoS$_2$ chapter models reinforcement-driven percolation, interfacial (Kapitza) resistance, and phonon boundary scattering, while preserving the PVA-continuous topology.
+
+A synthetic but physically constrained case study demonstrates that a properly tuned PVA/PCM/CuS--MoS$_2$ architecture can reduce peak thermal fluctuation amplitude, suppress entropy generation hot-spots, and improve exergy efficiency relative to unbuffered baselines. Parameter sweeps identify optimal pore volume fraction, filler loading below agglomeration threshold, and PCM melting range alignment with source transients. Proposed validation pathways include differential scanning calorimetry (DSC), scanning electron microscopy (SEM), electrical conductivity and thermal conductivity testing, and uncertainty propagation from measurement noise into predicted efficiency metrics.
+
+The dissertation contributes: (i) a defense-level integrated theory for thermoelectric enhancement under transient forcing, (ii) a materials architecture that explicitly separates scaffold function (PVA), reinforcement function (CuS--MoS$_2$), and latent storage function (PCM), and (iii) design maps translating multiphysics parameters into experimentally actionable targets. Limitations and future work are detailed, including long-duration durability, humidity effects on PVA, and scale-up manufacturing pathways for module-level implementation.
+
+\chapter*{Acknowledgments}
+\addcontentsline{toc}{chapter}{Acknowledgments}
+I express deep gratitude to my supervisor, committee members, laboratory colleagues, and family for their sustained support. Their scientific feedback, technical mentorship, and encouragement made this dissertation possible. I also acknowledge the institutional facilities that enabled conceptual modeling and prototype planning.
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\chapter*{Nomenclature and List of Symbols}
+\addcontentsline{toc}{chapter}{Nomenclature and List of Symbols}
+\begin{longtable}{>{\raggedright\arraybackslash}p{3cm}p{10cm}}
+\toprule
+Symbol & Description \\
+\midrule
+$S$ & Seebeck coefficient \\
+$\Pi$ & Peltier coefficient \\
+$\tau$ & Thomson coefficient \\
+$\sigma$ & Electrical conductivity \\
+$\kappa$ & Thermal conductivity \\
+$\kappa_e,\kappa_l$ & Electronic and lattice thermal conductivity components \\
+$ZT$ & Dimensionless thermoelectric figure of merit \\
+$T$ & Absolute temperature \\
+$q$ & Heat flux \\
+$\mathbf{J}_e$ & Electrical current density \\
+$L$ & Latent heat of PCM \\
+$f_l$ & Liquid fraction of PCM \\
+$R_K$ & Kapitza interfacial thermal resistance \\
+$\phi_p$ & Pore volume fraction in PVA scaffold \\
+$\phi_f$ & CuS--MoS$_2$ filler volume fraction \\
+$\eta_{ex}$ & Exergy efficiency \\
+\bottomrule
+\end{longtable}
+
+\clearpage
+\pagenumbering{arabic}
+
+\include{chapters/01_introduction}
+\include{chapters/02_literature_review}
+\include{chapters/03_thermoelectric_theory}
+\include{chapters/04_pcm_thermodynamics}
+\include{chapters/05_pva_scaffold_engineering}
+\include{chapters/06_cus_mos2_reinforcement}
+\include{chapters/07_multiphysics_modeling}
+\include{chapters/08_case_study_results}
+\include{chapters/09_entropy_exergy_analysis}
+\include{chapters/10_applications_limitations_future}
+\include{chapters/11_conclusions_contributions}
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\end{document}
